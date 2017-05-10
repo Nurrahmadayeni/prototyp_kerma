@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en"> 
+    <!-- START @HEAD -->
+    <head>
+        <!-- START @META SECTION -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="description" content="Blankon is a theme fullpack admin template powered by Twitter bootstrap 3 front-end framework. Included are multiple example pages, elements styles, and javascript widgets to get your project started.">
+        <meta name="keywords" content="admin, admin template, bootstrap3, clean, fontawesome4, good documentation, lightweight admin, responsive dashboard, webapp">
+        <meta name="author" content="Djava UI">
+        <title>Kerjasama</title>
+        <!--/ END META SECTION -->
+
+        <!-- START @FAVICONS -->
+        <link href="http://themes.djavaui.com/blankon-fullpack-admin-theme/img/ico/html/apple-touch-icon-144x144-precomposed.png" rel="apple-touch-icon-precomposed" sizes="144x144">
+        <link href="http://themes.djavaui.com/blankon-fullpack-admin-theme/img/ico/html/apple-touch-icon-114x114-precomposed.png" rel="apple-touch-icon-precomposed" sizes="114x114">
+        <link href="http://themes.djavaui.com/blankon-fullpack-admin-theme/img/ico/html/apple-touch-icon-72x72-precomposed.png" rel="apple-touch-icon-precomposed" sizes="72x72">
+        <link href="http://themes.djavaui.com/blankon-fullpack-admin-theme/img/ico/html/apple-touch-icon-57x57-precomposed.png" rel="apple-touch-icon-precomposed">
+        <link href="http://themes.djavaui.com/blankon-fullpack-admin-theme/img/ico/html/apple-touch-icon.png" rel="shortcut icon">
+        <!--/ END FAVICONS -->
+        <link rel="icon" type="image/png" href="../img/logo.png" />
+        <!--/ END FAVICONS -->
+
+        <!-- START @FONT STYLES -->
+        <link href="https://fonts.googleapis.com/css?family=Noto+Serif" rel="stylesheet"> 
+        <!--/ END FONT STYLES -->
+
+        <!-- START @GLOBAL MANDATORY STYLES -->
+        <link href="../assets/global/plugins/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!--/ END GLOBAL MANDATORY STYLES -->
+
+        <!-- START @PAGE LEVEL STYLES -->
+        <link href="../assets/global/plugins/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+        <link href="../assets/global/plugins/bower_components/animate.css/animate.min.css" rel="stylesheet">
+        <link href="../assets/global/plugins/bower_components/dropzone/downloads/css/dropzone.css" rel="stylesheet">
+        <link href="../assets/global/plugins/bower_components/jquery.gritter/css/jquery.gritter.css" rel="stylesheet">
+        <link href="../assets/global/plugins/bower_components/bootstrap-tour/build/css/bootstrap-tour.min.css" rel="stylesheet">
+        <link href="../assets/global/plugins/bower_components/datatables/dataTables.bootstrap.css" rel="stylesheet">
+        <link href="../assets/global/plugins/bower_components/bootstrap-datepicker-vitalets/css/datepicker.css" rel="stylesheet">
+        <link href="../assets/global/plugins/bower_components/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+        <link href="../assets/global/plugins/bower_components/jasny-bootstrap-fileinput/css/jasny-bootstrap-fileinput.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="../assets/global/plugins/bower_components/jquery/dist/jquery-ui.css">
+         <link rel="stylesheet" href="../assets/global/plugins/bower_components/select2/select2.min.css">
+        <!--/ END PAGE LEVEL STYLES -->
+
+        <!-- START @THEME STYLES -->
+        <link href="../assets/css/reset.css" rel="stylesheet">
+        <link href="../assets/css/layout.css" rel="stylesheet">
+        <link href="../assets/css/components.css" rel="stylesheet">
+        <link href="../assets/css/plugins.css" rel="stylesheet">
+        <link href="../assets/css/themes/default.theme.css" rel="stylesheet">
+        <link href="../assets/css/custom.css" rel="stylesheet">
+        <!--/ END THEME STYLES -->
+        <script src="../assets/global/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    </head>
+    <!--/ END HEAD -->
+    <body class="page-session page-sound page-header-fixed page-sidebar-fixed demo-dashboard-session">
+
+    <!-- Modal for Edit pekerjaan-->
+    <div id="edit" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Edit Pekerjaan</h4>
+                </div>
+                <div class="modal-body">
+                    <p id="nama_instansi"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-theme">Submit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+     <!-- Modal for delete pekerjaan -->
+    <div id="delete" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Hapus Pekerjaan</h4>
+                </div>
+                <div class="modal-body">
+                    <p id="nama_instansi_hapus">Apakah anda yakin ingin menghapus data ini?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-danger">OK</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- Modal for Tambah Kerma -->
+    <div id="tambah" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Lihat Kerjasama</h4>
+                </div>
+                <div class="modal-body">
+                    <form id='form' action="#" method="post" >
+                        <div class="form-group">
+                            <label for="name-user" class="control-label">Nama Pekerjaan : </label>
+                            <input type="text" class="form-control" name="nama_pekerjaan" required id='nama_pekerjaan'>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="control-label">Jumlah : </label>
+                            <input type="number" class="form-control" name="jumlah" required id='jumlah'>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="control-label">Satuan : </label>
+                            <input type="text" class="form-control" name="satuan" required id='satuan'>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="control-label">Total Harga : </label>
+                            <input type="number" class="form-control" name="jumlah" required id='jumlah'>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="control-label">Jumlah : </label>
+                            <input type="text" class="form-control" name="keterangan" required id='keterangan'>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-theme" value="Tambah" id="save">
+                            <input type="reset" class="btn btn-danger" value="Reset">
+                        </div>
+                    </form>
+                </div>                
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+        <!-- START @WRAPPER -->
+        <section id="wrapper">
+
+            <!-- START @HEADER -->
+            <header id="header">
+
+                <!-- Start header left -->
+                <div class="header-left">
+                    <!-- Start offcanvas left: This menu will take position at the top of template header (mobile only). Make sure that only #header have the `position: relative`, or it may cause unwanted behavior -->
+                    <div class="navbar-minimize-mobile left">
+                        <i class="fa fa-bars"></i>
+                    </div>
+                    <!--/ End offcanvas left -->
+
+                    <!-- Start navbar header -->
+                    <div class="navbar-header">
+
+                        <!-- Start brand -->
+                        <a id="tour-1" class="navbar-brand" href="dashboard.html">
+                             <img class="logo" src="../img/logo_usu_.png" alt="brand logo">
+                        </a><!-- /.navbar-brand -->
+                        <!--/ End brand -->
+
+                    </div><!-- /.navbar-header -->
+                    <!--/ End navbar header -->
+
+                    <!-- Start offcanvas right: This menu will take position at the top of template header (mobile only). Make sure that only #header have the `position: relative`, or it may cause unwanted behavior -->
+                    <div class="navbar-minimize-mobile right">
+                        <i class="fa fa-cog"></i>
+                    </div>
+                    <!--/ End offcanvas right -->
+
+                    <div class="clearfix"></div>
+                </div><!-- /.header-left -->
+                <!--/ End header left -->
+
+                <!-- Start header right -->
+                <div class="header-right">
+                    <!-- Start navbar toolbar -->
+                    <div class="navbar navbar-toolbar">
+
+                        <!-- Start left navigation -->
+                        <ul class="nav navbar-nav navbar-left">
+
+                            <!-- Start sidebar shrink -->
+                            <li id="tour-2" class="navbar-minimize">
+                                <a href="javascript:void(0);" title="Minimize sidebar">
+                                    <i class="fa fa-bars"></i>
+                                </a>
+                            </li>
+                            <!--/ End sidebar shrink -->
+
+                            <!-- Start form search -->
+                            <li class="navbar-search">
+                                <!-- Just view on mobile screen-->
+                                <a href="#" class="trigger-search"><i class="fa fa-search"></i></a>
+                                <form id="tour-3" class="navbar-form">
+                                    <div class="form-group has-feedback">
+                                        <input type="text" class="form-control typeahead rounded" placeholder="Search for people, places and things">
+                                        <button type="submit" class="btn btn-theme fa fa-search form-control-feedback rounded"></button>
+                                    </div>
+                                </form>
+                            </li>
+                            <!--/ End form search -->
+
+                        </ul><!-- /.nav navbar-nav navbar-left -->
+                        <!--/ End left navigation -->
+
+                        <!-- Start right navigation -->
+                        <ul class="nav navbar-nav navbar-right"><!-- /.nav navbar-nav navbar-right -->
+
+                        <!-- Start profile -->
+                        <li id="tour-6" class="dropdown navbar-profile">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="meta">
+                                    <span class="avatar"><img src="../img/logo.png" class="img-circle" alt="admin"></span>
+                                    <span class="text hidden-xs hidden-sm text-muted" id="u_profile"></span>
+                                    <span class="caret"></span>
+                                </span>
+                            </a>
+                            <!-- Start dropdown menu -->
+                            <ul class="dropdown-menu animated flipInX">
+                                <li><a href="page-profile.html"><i class="fa fa-user"></i>View profile</a></li>
+                                <li><a href="../login.html"><i class="fa fa-sign-out"></i>Logout</a></li>
+                            </ul>
+                            <!--/ End dropdown menu -->
+                        </li><!-- /.dropdown navbar-profile -->
+                        <!--/ End profile -->
+
+                        <!-- Start settings -->
+                        <li id="tour-7" class="navbar-setting pull-right">
+                            <a href="javascript:void(0);"><i class="fa fa-cog fa-spin"></i></a>
+                        </li><!-- /.navbar-setting pull-right -->
+                        <!--/ End settings -->
+
+                        </ul>
+                        <!--/ End right navigation -->
+
+                    </div><!-- /.navbar-toolbar -->
+                    <!--/ End navbar toolbar -->
+                </div><!-- /.header-right -->
+                <!--/ End header left -->
+
+            </header> <!-- /#header -->
+            <!--/ END HEADER -->
+           
+            <aside id="sidebar-left" class="sidebar-circle">
+                <!-- Start left navigation - profile shortcut -->
+                <div id="tour-8" class="sidebar-content">
+                    <div class="media">
+                        <a class="pull-left has-notif avatar" href="page-profile.html">
+                            <img src="../img/logo.png" alt="admin">
+                            <i class="online"></i>
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading">Hello, <span id='username'></span></h4>
+                            <!-- <small>Web Designer</small> -->
+                        </div>
+                    </div>
+                </div><!-- /.sidebar-content -->
+                <!--/ End left navigation -  profile shortcut -->
+
+                <!-- Start left navigation - menu -->
+                <ul id="tour-9" class="sidebar-menu">
+
+                    <!-- Start navigation - dashboard -->
+                    <li class="submenu active">
+                        <a href="kerma.html">
+                            <span class="icon"><i class="fa fa-dot-circle-o"></i></span>
+                            <span class="text">Kerjasama</span>                           
+                        </a>
+                    </li>
+                    <li class="submenu">
+                        <a href="kerma_akhir.html">
+                            <span class="icon"><i class="fa fa-dot-circle-o"></i></span>
+                            <span class="text">Kerjasama Segera Berakhir</span>                           
+                        </a>
+                    </li>
+                    <li class="submenu">
+                        <a href="javascript:void(0);">
+                            <span class="icon"><i class="fa fa-dot-circle-o"></i></span>
+                            <span class="text">Data Referensi </span>
+                            <span class="arrow"></span>
+                            <span class="selected"></span>
+                        </a>
+                        <ul>
+                            <li><a href="instansi_partner.html">Instansi Partner</a></li>
+                            <li><a href="unit_kerja.html">Unit Kerja</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="submenu" id="menu_admin" style="visibility: hidden;">
+                        <a href="user.html">
+                            <span class="icon"><i class="fa fa-dot-circle-o"></i></span>
+                            <span class="text">User</span>                           
+                        </a>
+                    </li>
+
+                    <!--/ End navigation - dashboard -->
+                </ul>
+
+            </aside><!-- /#sidebar-left -->
+            <!--/ END SIDEBAR LEFT -->
+
+            <!-- START @PAGE CONTENT -->
+            <section id="page-content">
+
+                <!-- Start page header -->
+                <div id="tour-11" class="header-content">
+                    <h2><i class="fa fa-home"></i>Tambah Kerjasama</h2>
+                    <div class="breadcrumb-wrapper hidden-xs">
+                        <span class="label">Direktori Anda:</span>
+                        <ol class="breadcrumb">
+                            <li class="active">Kerjasama > Tambah</li>
+                        </ol>
+                    </div>
+                </div><!-- /.header-content -->
+                <!--/ End page header -->
+
+                <!-- Start body content -->
+                <div class="panel panel-default rounded shadow">
+                <div class="body-content animated fadeIn">                                      
+                    <div class="row">                        
+                        <div class="clearfix"></div>                                
+                        <div class="col-md-12">
+                            <div class="panel-body">
+                            <form id='tambah_kerma' action="kerma.html" method="post" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label for="name" class="control-label">Jenis Kerjasama</label>
+                                    <div>
+                                    <div class='rdio radio-inline rdio-theme rounded'>
+                                        <input type='radio' class='radio-inline' id='radio-type-rounded1' required  value='1' name="jenis_kerma">
+                                        <label class='mat_kul' for='radio-type-rounded1'>MoU / Nota Kesepahaman</label>
+                                    </div>
+                                    <div class='rdio radio-inline rdio-theme rounded'>
+                                        <input type='radio' class='radio-inline' id='radio-type-rounded2' required  value='2' name="jenis_kerma">
+                                        <label class='mat_kul' for='radio-type-rounded2'>MoA / Perjanjian Kerja Sama</label>
+                                    </div>
+                                    <div class='rdio radio-inline rdio-theme rounded'>
+                                        <input type='radio' class='radio-inline' id='radio-type-rounded3' required  value='3' name="jenis_kerma">
+                                        <label class='mat_kul' for='radio-type-rounded3'>Addendum</label>
+                                    </div>
+                                    </div>
+                                </div>
+
+                                <!-- MOU -->
+                                <div id="MoU" style='display: none !important;'>
+                                    <div class="form-group">
+                                        <label for="name" class="control-label">Instansi Partner</label>
+                                        <select class="form-control mb-15 select2" name='instansi' required>
+                                            <option disabled selected>-- Pilih Instansi Partner --</option>
+                                            <option value="Universitas Samudra (Aceh Langsa)">Universitas Samudra (Aceh Langsa)</option>
+                                            <option value="PT. Telekomunikasi Indonesia, Tbk">PT. Telekomunikasi Indonesia, Tbk</option>
+                                            <option value="Yayasan Pendidikan Marsipature Hutana Be">Yayasan Pendidikan Marsipature Hutana Be</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name" class="control-label">Bidang Kerjasama</label>
+                                        <textarea name="bid_kerma" class="form-control" placeholder="Bidang Kerjasama" required></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tanda-tangan" class="control-label">Tanggal Tanda Tangan</label>
+                                        <input name="tgl_tanda_tangan" class="form-control" id="datepicker" type="text" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name" class="control-label">Tanggal Berakhir</label>
+                                        <input name="tgl_berakhir" class="form-control" id="datepicker2" type="text" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name" class="control-label">Bentuk Kerjasama</label>
+                                        <input class="form-control" name='bentuk_kerma' type="text" placeholder="Bentuk Kerjasama" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name" class="control-label">Nomor Dokumen USU</label>
+                                        <input class="form-control" name='nomor_dokumen_usu' type="text" placeholder="Nomor Dokumen USU" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name" class="control-label">Nomor Dokumen Instansi Partner</label>
+                                        <input class="form-control" name='nomor_dokumen_partner' type="text" placeholder="Nomor Dokumen Instansi Partner" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name" class="control-label">Upload Dokumen</label>
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <span class="btn btn-theme btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span><input type="file" name="upload_dokumen" required></span>
+                                            <span class="fileinput-filename"></span>
+                                            <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- MOA -->
+                                <div id="MoA" style='display: none !important;'>
+                                    <div class="form-group">
+                                        <label for="name" class="control-label">Bidang kerjasama berdasarkan MoU / Nota Kesepahaman</label>
+                                        <select class="form-control select2" style="width: 100%;" name="bid_kerma_mou" required>
+                                            <option disabled selected>-- Pilih Bidang Kerjasama --</option>
+                                            <option value="Development of mutually beneficial academic and training programs">Development of mutually beneficial academic and training programs</option>
+                                            <option value="Exchange of faculty and staff for purposes of teaching, research and extention">Exchange of faculty and staff for purposes of teaching, research and extention</option>
+                                            <option value="Reciprocal assistance for visiting academic faculty, staff and students">Reciprocal assistance for visiting academic faculty, staff and students</option>
+                                            <option value="Coordination of such activities as joint research and transfer of technologaya">Coordination of such activities as joint research and transfer of technologaya</option>
+                                            <option value="Exchange of documentation and research materials in fields of mutual interest">Exchange of documentation and research materials in fields of mutual interest</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name" class="control-label">Instansi Kerjasama</label>
+                                        <input class="form-control mb-15" type="text" name="instansi_kerma" id='instansi_kerma' disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name" class="control-label"> Bidang Kerjasama</label>
+                                        <input class="form-control mb-15" type="text" name="bid_kerma" id='bid_kerma' disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tanda-tangan" class="control-label">Tanggal Tanda Tangan</label>
+                                        <input name="tgl_tanda_tangan" class="form-control" id="tgl_tanda_tangan" type="text" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name" class="control-label">Tanggal Berakhir</label>
+                                        <input name="tgl_berakhir" class="form-control" id="tgl_berakhir" type="text" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name" class="control-label">Nomor Dokumen USU</label>
+                                        <input class="form-control" name='nomor_dokumen_usu' id="nomor_dokumen_usu" type="text" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name" class="control-label">Bidang Kerjasama MoA / Perjanjian Kerja Sama</label>
+                                        <textarea name="bid_kerma_moa" class="form-control" id="bid_kerma_moa" placeholder="Bidang Kerjasama MoA / Perjanjian Kerja Sama" required></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name" class="control-label">Implementasi</label>
+                                        <textarea name="implementasi" class="form-control" id="implementasi" placeholder="implementasi" required></textarea>
+                                    </div>
+                                      <div class="form-group">
+                                        <label for="tanda-tangan" class="control-label">Tanggal Tanda Tangan</label>
+                                        <input name="tgl_tanda_tangan" class="form-control" id="datepicker3" type="text" placeholder="mm/dd/YYYY" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name" class="control-label">Tanggal Berakhir</label>
+                                        <input name="tgl_berakhir" class="form-control" id="datepicker4" type="text" placeholder="mm/dd/YYYY" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name" class="control-label">Unit yang melakukan kerjasama</label>
+                                        <div>
+                                        <select class="form-control mb-15" name='unit_kerma'>
+                                            <option value="FASILKOM">FASILKOM</option>
+                                            <option value="FMIPA">FMIPA</option>
+                                            <option value="FE">FE</option>
+                                            <option value="FT">FT</option>
+                                            <option value="FH">FH</option>
+                                            <option value="FK">FK</option>
+                                            <option value="FKG">FKG</option>
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name" class="control-label">Nomor Dokumen USU</label>
+                                        <input class="form-control" name='nomor_dokumen_usu' type="text" placeholder="Nomor Dokumen USU" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name" class="control-label">Nomor Dokumen Instansi Partner</label>
+                                        <input class="form-control" name='nomor_dokumen_partner' type="text" placeholder="Nomor Dokumen Instansi Partner" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <a href="#tambah" data-toggle="modal" class="btn btn-theme btn-md rounded" title="Tambah"><i class="fa fa-plus"></i></a>
+                                    </div>
+                                    <div class="form-group">
+                                        <table class="table table-responsive table-theme">
+                                            <thead class="text-center">
+                                                <th>Nama Pekerjaan / Barang</th>
+                                                <th>Jumlah</th>
+                                                <th>Satuan</th>
+                                                <th>Total Harga</th>
+                                                <th>Keterangan</th>
+                                                <th>Aksi</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="text-center">
+                                                    <td>Psikotes Plus untuk supervisor dasar</td>
+                                                    <td>25</td>
+                                                    <td>Orang</td>
+                                                    <td>28125000</td>
+                                                    <td>Keterangan 1</td>
+                                                    <td class="text-center">
+                                                       <a href="#edit" class="btn btn-theme btn-md rounded" data-toggle="modal" title="Edit"><i class="fa fa-pencil" style="color:white;"></i></a>
+                                                        
+                                                       <a href="#delete" class="btn btn-danger btn-md rounded" data-toggle="modal" data-toggle="modal" title="Hapus"><i class="fa fa-trash"></i></a>
+                                                    </td>
+                                                </tr>
+                                                <tr class="text-center">
+                                                    <td>Assesment Centre untuk supervisori </td>
+                                                    <td>36</td>
+                                                    <td>Orang</td>
+                                                    <td>95400000</td>
+                                                    <td>Keterangan 2</td>
+                                                    <td>
+                                                       <a href="#edit" class="btn btn-theme btn-md rounded" data-toggle="modal" title="Edit"><i class="fa fa-pencil" style="color:white;"></i></a>
+                                                        
+                                                       <a href="#delete" class="btn btn-danger btn-md rounded" data-toggle="modal" data-toggle="modal" title="Hapus"><i class="fa fa-trash"></i></a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="form-group">
+                                        <label for="name" class="control-label">Nilai Kontrak</label>
+                                        <input class="form-control" name='nilai_kontrak' type="text" required disabled>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name" class="control-label">Nomor Dokumen Instansi Partner</label>
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <span class="btn btn-theme btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span><input type="file" name="file_dokumen_instansi" required></span>
+                                            <span class="fileinput-filename"></span>
+                                            <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!-- Addendum -->
+                                <div id="Addendum" style='display: none !important;'>
+                                    <div class="form-group">
+                                        <label for="name" class="control-label">Pilih Addenum</label>
+                                        <select class="form-control mb-15" name='pilihan' id="pilihan" required>
+                                            <option value="">-- Pilih --</option>
+                                            <option value="mou">MoU / Nota Kesepahaman</option>
+                                            <option value="moa">MoA / Perjanjian Kerja Sama</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- mou addendum -->
+                                    <div id="mou_addendum" style='display: none !important;'>
+                                        <div class="form-group">
+                                            <label for="name" class="control-label">Bidang kerjasama berdasarkan MoU / Nota Kesepahaman</label>
+                                            <select class="form-control select2" style="width: 100%;" name="bid_kerma_mou" required>
+                                                <option disabled selected>-- Pilih Bidang Kerjasama --</option>
+                                                <option value="Development of mutually beneficial academic and training programs">Development of mutually beneficial academic and training programs</option>
+                                                <option value="Exchange of faculty and staff for purposes of teaching, research and extention">Exchange of faculty and staff for purposes of teaching, research and extention</option>
+                                                <option value="Reciprocal assistance for visiting academic faculty, staff and students">Reciprocal assistance for visiting academic faculty, staff and students</option>
+                                                <option value="Coordination of such activities as joint research and transfer of technologaya">Coordination of such activities as joint research and transfer of technologaya</option>
+                                                <option value="Exchange of documentation and research materials in fields of mutual interest">Exchange of documentation and research materials in fields of mutual interest</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name" class="control-label">Instansi Partner</label>
+                                            <input type="text" class="form-control" id="instansi" disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name" class="control-label">Bidang Kerjasama</label>
+                                            <textarea name="bid_kerma" class="form-control" placeholder="Bidang Kerjasama" id="bid_kerma" required></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="tanda-tangan" class="control-label">Tanggal Tanda Tangan</label>
+                                            <input name="tgl_tanda_tangan" class="form-control" id="datepicker tgl_tanda_tangan" type="text" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name" class="control-label">Tanggal Berakhir</label>
+                                            <input name="tgl_berakhir" class="form-control" id="datepicker2 tgl_akhir" type="text" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name" class="control-label">Bentuk Kerjasama</label>
+                                            <input class="form-control" id="bentuk_kerma" name='bentuk_kerma' type="text" placeholder="Bentuk Kerjasama" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name" class="control-label">Nomor Dokumen USU</label>
+                                            <input class="form-control" id="nomor_dokumen_usu" name='nomor_dokumen_usu' type="text" placeholder="Nomor Dokumen USU" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name" class="control-label">Nomor Dokumen Instansi Partner</label>
+                                            <input class="form-control" id="nomor_dokumen_partner" name='nomor_dokumen_partner' type="text" placeholder="Nomor Dokumen Instansi Partner" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name" class="control-label">Upload Dokumen</label>
+                                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                <span class="btn btn-theme btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span><input type="file" id="upload_dokumen" name="upload_dokumen" required></span>
+                                                <span class="fileinput-filename"></span>
+                                                <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name" class="control-label">Download File Dokumen</label>
+                                            <div class="form-group">
+                                                <a href="download.html"><button class="btn btn-theme"><i class="fa fa-download" aria-hidden="true"></i> File </button></a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- moa addendum -->
+                                    <div id="moa_addendum" style='display: none !important;'>
+                                        <div class="form-group">
+                                            <label for="name" class="control-label">Bidang kerjasama berdasarkan MoU / Nota Kesepahaman</label>
+                                            <select class="form-control select2" style="width: 100%;" name="bid_kerma_mou" required>
+                                                <option disabled selected>-- Pilih Bidang Kerjasama --</option>
+                                                <option value="Development of mutually beneficial academic and training programs">Development of mutually beneficial academic and training programs</option>
+                                                <option value="Exchange of faculty and staff for purposes of teaching, research and extention">Exchange of faculty and staff for purposes of teaching, research and extention</option>
+                                                <option value="Reciprocal assistance for visiting academic faculty, staff and students">Reciprocal assistance for visiting academic faculty, staff and students</option>
+                                                <option value="Coordination of such activities as joint research and transfer of technologaya">Coordination of such activities as joint research and transfer of technologaya</option>
+                                                <option value="Exchange of documentation and research materials in fields of mutual interest">Exchange of documentation and research materials in fields of mutual interest</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name" class="control-label">Bidang kerjasama berdasarkan MoA / Nota Kesepahaman</label>
+                                            <select class="form-control select2" style="width: 100%;" name="bid_kerma_mou" required>
+                                                <option disabled selected>-- Pilih Bidang Kerjasama --</option>
+                                                <option value="Development of mutually beneficial academic and training programs">Development of mutually beneficial academic and training programs</option>
+                                                <option value="Exchange of faculty and staff for purposes of teaching, research and extention">Exchange of faculty and staff for purposes of teaching, research and extention</option>
+                                                <option value="Reciprocal assistance for visiting academic faculty, staff and students">Reciprocal assistance for visiting academic faculty, staff and students</option>
+                                                <option value="Coordination of such activities as joint research and transfer of technologaya">Coordination of such activities as joint research and transfer of technologaya</option>
+                                                <option value="Exchange of documentation and research materials in fields of mutual interest">Exchange of documentation and research materials in fields of mutual interest</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name" class="control-label">Bidang Kerjasama MoA / Perjanjian Kerja Sama</label>
+                                            <textarea name="bid_kerma_moa" class="form-control" id="bid_kerma_moa" placeholder="Bidang Kerjasama MoA / Perjanjian Kerja Sama" required></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name" class="control-label">Implementasi</label>
+                                            <textarea name="implementasi" class="form-control" id="implementasi" placeholder="implementasi" required></textarea>
+                                        </div>
+                                          <div class="form-group">
+                                            <label for="tanda-tangan" class="control-label">Tanggal Tanda Tangan</label>
+                                            <input name="tgl_tanda_tangan" class="form-control" id="datepicker3 tgl_tanda_tangan_moa" type="text" placeholder="mm/dd/YYYY" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name" class="control-label">Tanggal Berakhir</label>
+                                            <input name="tgl_berakhir" class="form-control" id="datepicker4 tgl_tanda_akhir" type="text" placeholder="mm/dd/YYYY" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name" class="control-label">Unit yang melakukan kerjasama</label>
+                                            <div>
+                                            <select class="form-control mb-15" name='unit_kerma' id="unit_kerma">
+                                                <option value="FASILKOM">FASILKOM</option>
+                                                <option value="FMIPA">FMIPA</option>
+                                                <option value="FE">FE</option>
+                                                <option value="FT">FT</option>
+                                                <option value="FH">FH</option>
+                                                <option value="FK">FK</option>
+                                                <option value="FKG">FKG</option>
+                                            </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name" class="control-label">Nomor Dokumen USU</label>
+                                            <input class="form-control" id="nomor_dokumen_usu" name='nomor_dokumen_usu' type="text" placeholder="Nomor Dokumen USU" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name" class="control-label">Nomor Dokumen Instansi Partner</label>
+                                            <input class="form-control" id="nomor_dokumen_partner" name='nomor_dokumen_partner' type="text" placeholder="Nomor Dokumen Instansi Partner" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <a href="#tambah" class="btn btn-theme btn-md rounded" data-toggle="modal" title="Tambah"><i class="fa fa-plus"></i></a>
+                                        </div>
+                                        <div class="form-group">
+                                            <table class="table table-responsive table-theme" id="tabel_pekerjaan">
+                                                <thead class="text-center">
+                                                    <th>Nama Pekerjaan / Barang</th>
+                                                    <th>Jumlah</th>
+                                                    <th>Satuan</th>
+                                                    <th>Total Harga</th>
+                                                    <th>Keterangan</th>
+                                                    <th>Aksi</th>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="text-center">
+                                                        <td>Psikotes Plus untuk supervisor dasar</td>
+                                                        <td>25</td>
+                                                        <td>Orang</td>
+                                                        <td>28125000</td>
+                                                        <td>Keterangan 1</td>
+                                                        <td class="text-center">
+                                                           <a href="#edit" data-toggle="modal" class="btn btn-theme btn-md rounded" title="Edit"><i class="fa fa-pencil" style="color:white;"></i></a>
+                                                            
+                                                           <a href="#delete" class="btn btn-danger btn-md rounded" data-toggle="modal" title="Hapus"><i class="fa fa-trash"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="text-center">
+                                                        <td>Assesment Centre untuk supervisori </td>
+                                                        <td>36</td>
+                                                        <td>Orang</td>
+                                                        <td>95400000</td>
+                                                        <td>Keterangan 2</td>
+                                                        <td>
+                                                           <a href="#edit" data-toggle="modal" class="btn btn-theme btn-md rounded" title="Edit"><i class="fa fa-pencil" style="color:white;"></i></a>
+                                                            
+                                                           <a href="#delete" class="btn btn-danger btn-md rounded" data-toggle="modal" title="Hapus"><i class="fa fa-trash"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                            <div class="form-group">
+                                                <label for="name" class="control-label">Nilai Kontrak</label>
+                                                <input class="form-control" id="nilai_kontrak" name='nilai_kontrak' type="text" required disabled>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name" class="control-label">Nomor Dokumen Instansi Partner</label>
+                                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                <span class="btn btn-theme btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span>
+                                                <input type="file" id="file_dokumen_instansi" name="file_dokumen_instansi" required></span>
+                                                <span class="fileinput-filename"></span>
+                                                <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name" class="control-label">Download File Dokumen</label>
+                                            <div class="form-group">
+                                                <a href="download.html"><button class="btn btn-theme"><i class="fa fa-download" aria-hidden="true"></i> File </button></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="submit"></div>
+                            </form>
+                        </div>
+                    </div><!-- /.row -->
+                </div><!-- /.body-content -->
+                <!--/ End body content -->
+                </div>
+                </div>
+
+                <!-- Start footer content -->
+                <footer class="footer-content">
+                    <span id="tour-19">
+                        2016 - <span id="copyright-year"></span> © Kerma USU - Kerja Sama
+                    </span>
+                    <span id="tour-20" class="pull-right">0.01 GB(0%) of 15 GB used</span>
+                </footer><!-- /.footer-content -->
+                <!--/ End footer content -->
+
+            </section><!-- /#page-content -->
+            <!--/ END PAGE CONTENT -->
+
+            <!-- START @SIDEBAR RIGHT -->
+            <aside id="sidebar-right">
+
+                <div class="panel panel-tab">
+                    <div class="panel-heading no-padding">
+                        <div class="pull-right">
+                            <ul class="nav nav-tabs">
+                                <li>
+                                    <a href="#sidebar-setting" data-toggle="tab">
+                                        <i class="fa fa-paint-brush"></i>
+                                    </a>
+                                </li>                               
+                            </ul>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-body no-padding">
+                        <div class="tab-content">
+
+                            <div class="tab-pane in active" id="sidebar-setting">
+                                <div class="sidebar-setting">
+                                    <!-- Start right navigation - menu -->
+                                    <ul class="sidebar-menu">
+                                        <!-- Start category color schemes -->
+                                        <li class="sidebar-category">
+                                            <span>COLOR SCHEMES</span>
+                                            <span class="pull-right"><i class="fa fa-tint"></i></span>
+                                        </li>
+                                        <!--/ End category color schemes -->
+
+                                        <!-- Start navigation - themes -->
+                                        <li>
+                                            <div class="sidebar-themes color-schemes">
+
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #81b71a" data-toggle="tooltip" data-placement="right" data-original-title="Default"><span class="hide">default</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #00B1E1" data-toggle="tooltip" data-placement="top" data-original-title="Blue"><span class="hide">blue</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #37BC9B" data-toggle="tooltip" data-placement="top" data-original-title="Cyan"><span class="hide">cyan</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #8CC152" data-toggle="tooltip" data-placement="top" data-original-title="Green"><span class="hide">green</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #E9573F" data-toggle="tooltip" data-placement="top" data-original-title="Red"><span class="hide">red</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #F6BB42" data-toggle="tooltip" data-placement="top" data-original-title="Yellow"><span class="hide">yellow</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #906094" data-toggle="tooltip" data-placement="top" data-original-title="Purple"><span class="hide">purple</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #D39174" data-toggle="tooltip" data-placement="top" data-original-title="Brown"><span class="hide">brown</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #9FB478" data-toggle="tooltip" data-placement="left" data-original-title="Green Army"><span class="hide">green-army</span></a>
+
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #63D3E9" data-toggle="tooltip" data-placement="right" data-original-title="Blue Sea"><span class="hide">blue-sea</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #5577B4" data-toggle="tooltip" data-placement="top" data-original-title="Blue Gray"><span class="hide">blue-gray</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #AF86B9" data-toggle="tooltip" data-placement="top" data-original-title="Purple Gray"><span class="hide">purple-gray</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #CC6788" data-toggle="tooltip" data-placement="top" data-original-title="Purple Wine"><span class="hide">purple-wine</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #F06F6F" data-toggle="tooltip" data-placement="top" data-original-title="Alizarin Crimson"><span class="hide">alizarin-crimson</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #979797" data-toggle="tooltip" data-placement="top" data-original-title="Black And White"><span class="hide">black-and-white</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #8BC4B9" data-toggle="tooltip" data-placement="top" data-original-title="Amazon"><span class="hide">amazon</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #B0B069" data-toggle="tooltip" data-placement="top" data-original-title="Amber"><span class="hide">amber</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #A9C784" data-toggle="tooltip" data-placement="left" data-original-title="Android green"><span class="hide">android-green</span></a>
+
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #B3998A" data-toggle="tooltip" data-placement="right" data-original-title="Antique brass"><span class="hide">antique-brass</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #8D8D6E" data-toggle="tooltip" data-placement="top" data-original-title="Antique Bronze"><span class="hide">antique-bronze</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #B0B69D" data-toggle="tooltip" data-placement="top" data-original-title="Artichoke"><span class="hide">artichoke</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #F19B69" data-toggle="tooltip" data-placement="top" data-original-title="Atomic Tangerine"><span class="hide">atomic-tangerine</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #98777B" data-toggle="tooltip" data-placement="top" data-original-title="Bazaar"><span class="hide">bazaar</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #C3A961" data-toggle="tooltip" data-placement="top" data-original-title="Bistre Brown"><span class="hide">bistre-brown</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #D6725E" data-toggle="tooltip" data-placement="top" data-original-title="Bittersweet"><span class="hide">bittersweet</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #7789D1" data-toggle="tooltip" data-placement="top" data-original-title="Blueberry"><span class="hide">blueberry</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #6FA362" data-toggle="tooltip" data-placement="left" data-original-title="Bud Green"><span class="hide">bud-green</span></a>
+
+                                            </div><!-- /.sidebar-themes -->
+                                        </li>
+                                        <!--/ End navigation - themes -->
+
+                                        <!-- Start category navbar color -->
+                                        <li class="sidebar-category">
+                                            <span>NAVBAR COLOR</span>
+                                            <span class="pull-right"><i class="fa fa-tint"></i></span>
+                                        </li>
+                                        <!--/ End category navbar color -->
+
+                                        <!-- Start navigation - navbar color -->
+                                        <li>
+                                            <div class="sidebar-themes navbar-color">
+
+                                                <a class="theme bg-dark" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Dark"><span class="hide">dark</span></a>
+                                                <a class="theme bg-light" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Light"><span class="hide">light</span></a>
+                                                <a class="theme bg-primary" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Primary"><span class="hide">primary</span></a>
+                                                <a class="theme bg-success" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Success"><span class="hide">success</span></a>
+                                                <a class="theme bg-info" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Info"><span class="hide">info</span></a>
+                                                <a class="theme bg-warning" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Warning"><span class="hide">warning</span></a>
+                                                <a class="theme bg-danger" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Danger"><span class="hide">danger</span></a>
+
+                                            </div><!-- /.navbar-color -->
+                                        </li>
+                                        <!--/ End navigation - navbar color -->
+
+                                        <!-- Start category sidebar color -->
+                                        <li class="sidebar-category">
+                                            <span>SIDEBAR COLOR</span>
+                                            <span class="pull-right"><i class="fa fa-tint"></i></span>
+                                        </li>
+                                        <!--/ End category sidebar color -->
+
+                                        <!-- Start navigation - sidebar color -->
+                                        <li>
+                                            <div class="sidebar-themes sidebar-color">
+
+                                                <a class="theme bg-dark" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Dark"><span class="hide">dark</span></a>
+                                                <a class="theme bg-light" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Light"><span class="hide">light</span></a>
+                                                <a class="theme bg-primary" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Primary"><span class="hide">primary</span></a>
+                                                <a class="theme bg-success" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Success"><span class="hide">success</span></a>
+                                                <a class="theme bg-info" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Info"><span class="hide">info</span></a>
+                                                <a class="theme bg-warning" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Warning"><span class="hide">warning</span></a>
+                                                <a class="theme bg-danger" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Danger"><span class="hide">danger</span></a>
+
+                                            </div><!-- /.sidebar-color -->
+                                        </li>
+                                        <!--/ End navigation - sidebar color -->
+
+                                        <!-- Start category task progress -->
+                                        <li class="sidebar-category">
+                                            <span>TASK PROGRESS</span>
+                                            <span class="pull-right"><i class="fa fa-sliders"></i></span>
+                                        </li>
+                                        <!--/ End category task progress -->
+
+                                        <!--/ Start navigation - task progress -->
+                                        <li>
+                                            <ul class="list-group sidebar-task">
+                                                <li class="list-group-item">
+                                                    <p class="details"> <span> Core System </span> <span class="pull-right"> 82% </span> </p>
+                                                    <div class="progress progress-xs progress-striped active no-margin">
+                                                        <div style="width: 82%" class="progress-bar progress-bar-success"> </div>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <p class="details"> <span> Front-End </span> <span class="pull-right"> 67% </span> </p>
+                                                    <div class="progress progress-xs progress-striped active no-margin">
+                                                        <div style="width: 47%" class="progress-bar progress-bar-danger"> </div>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <p class="details"> <span> Back-End </span> <span class="pull-right"> 45% </span> </p>
+                                                    <div class="progress progress-xs progress-striped active no-margin">
+                                                        <div style="width: 47%" class="progress-bar progress-bar-info"> </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <!--/ End navigation - task progress -->
+
+                                        <!-- Start category summary system -->
+                                        <li class="sidebar-category">
+                                            <span>SUMMARY SYSTEM</span>
+                                            <span class="pull-right"><i class="fa fa-bar-chart-o"></i></span>
+                                        </li>
+                                        <!--/ End category summary system -->
+
+                                        <!-- Start left navigation - summary -->
+                                        <li>
+                                            <ul class="sidebar-summary sparklines">
+                                                <li>
+                                                    <div class="list-info">
+                                                        <span>Average Users</span>
+                                                        <h4>1, 412, 101</h4>
+                                                    </div>
+                                                    <div class="chart"><span class="average">4,2,3,2,4,2,5,1,2,2,5,3</span></div>
+                                                    <div class="clearfix"></div>
+                                                </li>
+                                                <li>
+                                                    <div class="list-info">
+                                                        <span>Daily Traffic</span>
+                                                        <h4>781, 601</h4>
+                                                    </div>
+                                                    <div class="chart"><span class="traffic">1,2,3,2,4,1,5,3,2,4,2,3</span></div>
+                                                    <div class="clearfix"></div>
+                                                </li>
+                                                <li>
+                                                    <div class="list-info">
+                                                        <span>Disk Usage</span>
+                                                        <h4>52.2%</h4>
+                                                    </div>
+                                                    <div class="chart"><span class="disk">5,5,3,2,1,3,4,3,2,4,1,3</span></div>
+                                                    <div class="clearfix"></div>
+                                                </li>
+                                                <li>
+                                                    <div class="list-info">
+                                                        <span>CPU Usage</span>
+                                                        <h4>67.8%</h4>
+                                                    </div>
+                                                    <div class="chart"><span class="cpu">1,5,3,2,4,5,5,3,2,4,5,3</span></div>
+                                                    <div class="clearfix"></div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <!--/ End left navigation - summary -->
+                                    </ul>
+                                    <!-- Start right navigation - menu -->
+                                </div>
+                            </div><!-- /#sidebar-setting -->
+                        </div>
+                    </div>
+                </div>
+
+            </aside><!-- /#sidebar-right -->
+            <!--/ END SIDEBAR RIGHT -->
+
+        </section><!-- /#wrapper -->
+        <!--/ END WRAPPER -->
+
+        <!-- START @BACK TOP -->
+        <div id="back-top" class="animated pulse circle">
+            <i class="fa fa-angle-up"></i>
+        </div><!-- /#back-top -->
+        <!--/ END BACK TOP -->
+
+        <!-- START @CORE PLUGINS -->
+        <script src="../assets/global/plugins/bower_components/jquery-cookie/jquery.cookie.js"></script>
+        <script src="../assets/global/plugins/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="../assets/global/plugins/bower_components/typehead.js/dist/handlebars.js"></script>
+        <script src="../assets/global/plugins/bower_components/typehead.js/dist/typeahead.bundle.min.js"></script>
+        <script src="../assets/global/plugins/bower_components/jquery-nicescroll/jquery.nicescroll.min.js"></script>
+        <script src="../assets/global/plugins/bower_components/jquery.sparkline.min/index.js"></script>
+        <script src="../assets/global/plugins/bower_components/jquery-easing-original/jquery.easing.1.3.min.js"></script>
+        <script src="../assets/global/plugins/bower_components/bootbox/bootbox.js"></script>
+        <script src="../assets/global/plugins/bower_components/bootstrap-datepicker-vitalets/js/bootstrap-datepicker.js"></script>
+
+        <!--/ END CORE PLUGINS -->
+
+        <!-- START @PAGE LEVEL PLUGINS -->
+        <script src="../assets/global/plugins/bower_components/bootstrap-session-timeout/dist/bootstrap-session-timeout.min.js"></script>
+        <script src="../assets/global/plugins/bower_components/flot/jquery.flot.js"></script>
+        <script src="../assets/global/plugins/bower_components/flot/jquery.flot.spline.min.js"></script>
+        <script src="../assets/global/plugins/bower_components/flot/jquery.flot.categories.js"></script>
+        <script src="../assets/global/plugins/bower_components/flot/jquery.flot.tooltip.min.js"></script>
+        <script src="../assets/global/plugins/bower_components/flot/jquery.flot.resize.js"></script>
+        <script src="../assets/global/plugins/bower_components/flot/jquery.flot.pie.js"></script>
+        <script src="../assets/global/plugins/bower_components/dropzone/downloads/dropzone.min.js"></script>
+        <script src="../assets/global/plugins/bower_components/jquery.gritter/js/jquery.gritter.min.js"></script>
+        <script src="../assets/global/plugins/bower_components/skycons-html5/skycons.js"></script>
+        <script src="../assets/global/plugins/bower_components/waypoints/lib/jquery.waypoints.min.js"></script>
+        <script src="../assets/global/plugins/bower_components/counter-up/jquery.counterup.min.js"></script>
+        <script src="../assets/global/plugins/bower_components/bootstrap-tour/build/js/bootstrap-tour.min.js"></script>
+        <script src="../assets/global/plugins/bower_components/jasny-bootstrap-fileinput/js/jasny-bootstrap.fileinput.min.js"></script>
+        <script src="../assets/global/plugins/bower_components/select2/select2.full.min.js"></script>
+        <!--/ END PAGE LEVEL PLUGINS -->
+
+        <!-- START @PAGE LEVEL SCRIPTS -->
+        <script src="../assets/js/apps.js"></script>
+        <script src="../assets/js/pages/blankon.dashboard.js"></script>
+        <script src="../assets/js/demo.js"></script>
+        <script src="../assets/js/pages/blankon.form.picker.js"></script>
+        <!--/ END PAGE LEVEL SCRIPTS -->
+        <!--/ END JAVASCRIPT SECTION -->
+
+        <!--Datatables -->
+        <script src="../assets/global/plugins/bower_components/datatables/jquery.dataTables.min.js"></script>
+        <script src="../assets/global/plugins/bower_components/datatables/dataTables.bootstrap.min.js"></script> 
+
+        <!-- Daterangepicker -->
+        <script src="../assets/global/plugins/bower_components/jquery/dist/jquery-ui.js"></script>
+
+
+        <!-- START GOOGLE ANALYTICS -->
+        <script  type="text/javascript">
+            $( "#datepicker, #datepicker2" ).datepicker({
+              changeMonth: true,
+              changeYear: true
+            });
+
+            $( "#datepicker3, #datepicker4" ).datepicker({
+              changeMonth: true,
+              changeYear: true
+            });
+
+            $(document).ready(function () {  
+                $('input[name=jenis_kerma]').filter('[value=1]').prop('checked', true);
+                $('#MoU').fadeIn('slow');   
+
+                var button = '<button class="btn btn-theme btn-push" type="submit" id="submit">Submit</button>'
+                +'  <button class="btn btn-danger btn-push" type="reset">Reset</button>';                 
+                $('#submit').html(button);
+
+                $("input:radio[name=jenis_kerma]").click(function () {
+                    if($('input[name=jenis_kerma]:checked').val()=='1'){
+                        $('#MoU').fadeIn('slow'); 
+                        $('#MoA').hide();
+                        $('#Addendum').hide();
+                        var button = '<button class="btn btn-theme btn-push" type="submit" id="submit">Submit</button>'
+                        +'  <button class="btn btn-danger btn-push" type="reset">Reset</button>';                 
+                        $('#submit').html(button);
+                    }else if($('input[name=jenis_kerma]:checked').val()=='2'){
+                        $('#MoU').hide();
+                        $('#MoA').fadeIn('slow'); 
+                        $('#Addendum').hide();
+                        var button = '<button class="btn btn-theme btn-push" type="submit" id="submit">Submit</button>'
+                        +'  <button class="btn btn-danger btn-push" type="reset">Reset</button>';                 
+                        $('#submit').html(button);
+                    }else if($('input[name=jenis_kerma]:checked').val()=='3'){
+                        $('#MoU').hide();
+                        $('#MoA').hide();
+                        $('#Addendum').fadeIn('slow');
+                        var button = '<button class="btn btn-theme btn-push" type="submit" id="submit">Submit</button>'
+                        +'  <button class="btn btn-danger btn-push" type="reset">Reset</button>';                 
+                        $('#submit').html(button);
+                    }
+                });
+                
+                $('#pilihan').on('change', function() {
+                    if(document.getElementById("pilihan").value=="mou"){
+                        $('#mou_addendum').fadeIn('slow'); 
+                        $('#moa_addendum').hide(); 
+                    }else{
+                        $('#moa_addendum').fadeIn('slow'); 
+                        $('#mou_addendum').hide(); 
+                    }
+                    // if(this.value=='mou'){
+                    //     $('#mou_addendum').fadeIn('slow'); 
+                    //     $('#moa_addendum').hide(); 
+                    // }elseif(this.value=='mou'){
+                    //     $('#moa_addendum').fadeIn('slow'); 
+                    //     $('#mou_addendum').hide(); 
+                    // }
+                });     
+
+                $(".select2").select2();
+            
+                $("#data").DataTable();   
+                $('#back-top').on('click', function (e) {
+                    e.preventDefault();
+                    $('html,body').animate({
+                        scrollTop: 0
+                    }, 700);
+                });  
+     
+            });
+            document.getElementById("username").innerHTML = localStorage.getItem("username");
+            document.getElementById("u_profile").innerHTML = localStorage.getItem("username");
+            
+            if(localStorage.getItem("username")=="super"){
+                document.getElementById("menu_admin").show();
+            }
+        </script>
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-55892530-1', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+        <!--/ END GOOGLE ANALYTICS -->
+
+    </body>
+    <!--/ END BODY -->
+
+</html>

@@ -1,0 +1,653 @@
+<script>
+    
+</script>
+<!DOCTYPE html>
+<html lang="en"> 
+    <!-- START @HEAD -->
+    <head>
+        <!-- START @META SECTION -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="description" content="Blankon is a theme fullpack admin template powered by Twitter bootstrap 3 front-end framework. Included are multiple example pages, elements styles, and javascript widgets to get your project started.">
+        <meta name="keywords" content="admin, admin template, bootstrap3, clean, fontawesome4, good documentation, lightweight admin, responsive dashboard, webapp">
+        <meta name="author" content="Djava UI">
+        <title>User</title>
+        <!--/ END META SECTION -->
+
+        <!-- START @FAVICONS -->
+        <link href="http://themes.djavaui.com/blankon-fullpack-admin-theme/img/ico/html/apple-touch-icon-144x144-precomposed.png" rel="apple-touch-icon-precomposed" sizes="144x144">
+        <link href="http://themes.djavaui.com/blankon-fullpack-admin-theme/img/ico/html/apple-touch-icon-114x114-precomposed.png" rel="apple-touch-icon-precomposed" sizes="114x114">
+        <link href="http://themes.djavaui.com/blankon-fullpack-admin-theme/img/ico/html/apple-touch-icon-72x72-precomposed.png" rel="apple-touch-icon-precomposed" sizes="72x72">
+        <link href="http://themes.djavaui.com/blankon-fullpack-admin-theme/img/ico/html/apple-touch-icon-57x57-precomposed.png" rel="apple-touch-icon-precomposed">
+        <link href="http://themes.djavaui.com/blankon-fullpack-admin-theme/img/ico/html/apple-touch-icon.png" rel="shortcut icon">
+        <!--/ END FAVICONS -->
+        <link rel="icon" type="image/png" href="../img/logo.png" />
+        <!--/ END FAVICONS -->
+
+        <!-- START @FONT STYLES -->
+        <link href="https://fonts.googleapis.com/css?family=Noto+Serif" rel="stylesheet"> 
+        <!--/ END FONT STYLES -->
+
+        <!-- START @GLOBAL MANDATORY STYLES -->
+        <link href="../assets/global/plugins/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!--/ END GLOBAL MANDATORY STYLES -->
+
+        <!-- START @PAGE LEVEL STYLES -->
+        <link href="../assets/global/plugins/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+        <link href="../assets/global/plugins/bower_components/animate.css/animate.min.css" rel="stylesheet">
+        <link href="../assets/global/plugins/bower_components/dropzone/downloads/css/dropzone.css" rel="stylesheet">
+        <link href="../assets/global/plugins/bower_components/jquery.gritter/css/jquery.gritter.css" rel="stylesheet">
+        <link href="../assets/global/plugins/bower_components/bootstrap-tour/build/css/bootstrap-tour.min.css" rel="stylesheet">
+        <link href="../assets/global/plugins/bower_components/datatables/dataTables.bootstrap.css" rel="stylesheet">
+        <!--/ END PAGE LEVEL STYLES -->
+
+        <!-- START @THEME STYLES -->
+        <link href="../assets/css/reset.css" rel="stylesheet">
+        <link href="../assets/css/layout.css" rel="stylesheet">
+        <link href="../assets/css/components.css" rel="stylesheet">
+        <link href="../assets/css/plugins.css" rel="stylesheet">
+        <link href="../assets/css/themes/default.theme.css" rel="stylesheet">
+        <link href="../assets/css/custom.css" rel="stylesheet">
+        <!--/ END THEME STYLES -->
+        <script src="../assets/global/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    </head>
+    <!--/ END HEAD -->
+    <body class="page-session page-sound page-header-fixed page-sidebar-fixed demo-dashboard-session">
+
+     <!-- Modal for add instansi -->
+    <div id="tambah" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Tambah User</h4>
+                </div>
+                <div class="modal-body">
+                    <form id='form' action="#" method="post" >
+                        <div class="form-group">
+                            <label for="name-user" class="control-label">Username : </label>
+                            <input type="text" class="form-control" name="username" required id='username'>
+                        </div>
+                        <div class="form-group">
+                            <label for="name-user" class="control-label">Password : </label>
+                            <input type="text" class="form-control" name="password" required id='password'>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="control-label">Unit Kerja : </label>
+                            <select class="form-control mb-15" name='status' required>
+                                <option selected disabled>-- Pilih Unit Kerja</option>
+                                <option value="biro_akademik">Biro Akademik</option>
+                                <option value="psi">Pusat Sistem Informasi</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="name-user" class="control-label">Full Name : </label>
+                            <input type="text" class="form-control" name="full_name" required id='full_name'>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="control-label">Email : </label>
+                            <input type="email" class="form-control" name="email" required id='email'>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-theme" value="Tambah" id="save">
+                            <input type="reset" class="btn btn-danger" value="Reset">
+                        </div>
+                    </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+        <!-- START @WRAPPER -->
+        <section id="wrapper">
+
+            <!-- START @HEADER -->
+            <header id="header">
+
+                <!-- Start header left -->
+                <div class="header-left">
+                    <!-- Start offcanvas left: This menu will take position at the top of template header (mobile only). Make sure that only #header have the `position: relative`, or it may cause unwanted behavior -->
+                    <div class="navbar-minimize-mobile left">
+                        <i class="fa fa-bars"></i>
+                    </div>
+                    <!--/ End offcanvas left -->
+
+                    <!-- Start navbar header -->
+                    <div class="navbar-header">
+
+                        <!-- Start brand -->
+                        <a id="tour-1" class="navbar-brand" href="dashboard.html">
+                             <img class="logo" src="../img/logo_usu_.png" alt="brand logo">
+                        </a><!-- /.navbar-brand -->
+                        <!--/ End brand -->
+
+                    </div><!-- /.navbar-header -->
+                    <!--/ End navbar header -->
+
+                    <!-- Start offcanvas right: This menu will take position at the top of template header (mobile only). Make sure that only #header have the `position: relative`, or it may cause unwanted behavior -->
+                    <div class="navbar-minimize-mobile right">
+                        <i class="fa fa-cog"></i>
+                    </div>
+                    <!--/ End offcanvas right -->
+
+                    <div class="clearfix"></div>
+                </div><!-- /.header-left -->
+                <!--/ End header left -->
+
+                <!-- Start header right -->
+                <div class="header-right">
+                    <!-- Start navbar toolbar -->
+                    <div class="navbar navbar-toolbar">
+
+                        <!-- Start left navigation -->
+                        <ul class="nav navbar-nav navbar-left">
+
+                            <!-- Start sidebar shrink -->
+                            <li id="tour-2" class="navbar-minimize">
+                                <a href="javascript:void(0);" title="Minimize sidebar">
+                                    <i class="fa fa-bars"></i>
+                                </a>
+                            </li>
+                            <!--/ End sidebar shrink -->
+
+                            <!-- Start form search -->
+                            <li class="navbar-search">
+                                <!-- Just view on mobile screen-->
+                                <a href="#" class="trigger-search"><i class="fa fa-search"></i></a>
+                                <form id="tour-3" class="navbar-form">
+                                    <div class="form-group has-feedback">
+                                        <input type="text" class="form-control typeahead rounded" placeholder="Search for people, places and things">
+                                        <button type="submit" class="btn btn-theme fa fa-search form-control-feedback rounded"></button>
+                                    </div>
+                                </form>
+                            </li>
+                            <!--/ End form search -->
+
+                        </ul><!-- /.nav navbar-nav navbar-left -->
+                        <!--/ End left navigation -->
+
+                        <!-- Start right navigation -->
+                        <ul class="nav navbar-nav navbar-right"><!-- /.nav navbar-nav navbar-right -->
+
+                        <!-- Start profile -->
+                        <li id="tour-6" class="dropdown navbar-profile">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="meta">
+                                    <span class="avatar"><img src="../img/logo.png" class="img-circle" alt="admin"></span>
+                                    <span class="text hidden-xs hidden-sm text-muted" id="u_profile"></span>
+                                    <span class="caret"></span>
+                                </span>
+                            </a>
+                            <!-- Start dropdown menu -->
+                            <ul class="dropdown-menu animated flipInX">
+                                <li><a href="page-profile.html"><i class="fa fa-user"></i>View profile</a></li>
+                                <li><a href="../login.html"><i class="fa fa-sign-out"></i>Logout</a></li>
+                            </ul>
+                            <!--/ End dropdown menu -->
+                        </li><!-- /.dropdown navbar-profile -->
+                        <!--/ End profile -->
+
+                        <!-- Start settings -->
+                        <li id="tour-7" class="navbar-setting pull-right">
+                            <a href="javascript:void(0);"><i class="fa fa-cog fa-spin"></i></a>
+                        </li><!-- /.navbar-setting pull-right -->
+                        <!--/ End settings -->
+
+                        </ul>
+                        <!--/ End right navigation -->
+
+                    </div><!-- /.navbar-toolbar -->
+                    <!--/ End navbar toolbar -->
+                </div><!-- /.header-right -->
+                <!--/ End header left -->
+
+            </header> <!-- /#header -->
+            <!--/ END HEADER -->
+           
+            <aside id="sidebar-left" class="sidebar-circle">
+                <!-- Start left navigation - profile shortcut -->
+                <div id="tour-8" class="sidebar-content">
+                    <div class="media">
+                        <a class="pull-left has-notif avatar" href="page-profile.html">
+                            <img src="../img/logo.png" alt="admin">
+                            <i class="online"></i>
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading">Hello, <span id='username'></span></h4>
+                            <!-- <small>Web Designer</small> -->
+                        </div>
+                    </div>
+                </div><!-- /.sidebar-content -->
+                <!--/ End left navigation -  profile shortcut -->
+
+                <!-- Start left navigation - menu -->
+                <ul id="tour-9" class="sidebar-menu">
+
+                    <!-- Start navigation - dashboard -->
+                    <li class="submenu active">
+                        <a href="kerma.html">
+                            <span class="icon"><i class="fa fa-dot-circle-o"></i></span>
+                            <span class="text">Kerjasama</span>                           
+                        </a>
+                    </li>
+                    <li class="submenu">
+                        <a href="kerma_akhir.html">
+                            <span class="icon"><i class="fa fa-dot-circle-o"></i></span>
+                            <span class="text">Kerjasama Segera Berakhir</span>                           
+                        </a>
+                    </li>
+                    <li class="submenu">
+                        <a href="javascript:void(0);">
+                            <span class="icon"><i class="fa fa-dot-circle-o"></i></span>
+                            <span class="text">Data Referensi </span>
+                            <span class="arrow"></span>
+                            <span class="selected"></span>
+                        </a>
+                        <ul>
+                            <li><a href="instansi_partner.html">Instansi Partner</a></li>
+                            <li><a href="unit_kerja.html">Unit Kerja</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="submenu" id="menu_admin">
+                        <a href="user.html">
+                            <span class="icon"><i class="fa fa-dot-circle-o"></i></span>
+                            <span class="text">User</span>                           
+                        </a>
+                    </li>
+
+                    <!--/ End navigation - dashboard -->
+                </ul>
+
+            </aside><!-- /#sidebar-left -->
+            <!--/ END SIDEBAR LEFT -->
+
+            <!-- START @PAGE CONTENT -->
+            <section id="page-content">
+
+                <!-- Start page header -->
+                <div id="tour-11" class="header-content">
+                    <h2><i class="fa fa-home"></i>Daftar User</h2>
+                    <div class="breadcrumb-wrapper hidden-xs">
+                        <span class="label">Direktori Anda:</span>
+                        <ol class="breadcrumb">
+                            <li class="active">User</li>
+                        </ol>
+                    </div>
+                </div><!-- /.header-content -->
+                <!--/ End page header -->
+
+                <!-- Start body content -->
+                <div class="body-content animated fadeIn">                                      
+                    <div class="row">                        
+                        <div>
+                            <p class='pull-right'>
+                                <a data-toggle="tooltip" data-placement="top" title="Tambah"><button class="btn btn-theme btn-md rounded" data-toggle="modal" data-target="#tambah"><i class="fa fa-plus"></i> Tambah User</button></a>
+                            </p>
+                        </div>
+                        <div class="clearfix"></div>                                
+                        <div class="col-md-12">
+                            <!-- Start sample table -->
+                            <!-- <div class="table-responsive  rounded mb-20"> -->
+                            <table id="data" class="table table-striped table-theme table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center border-right">No.</th>
+                                        <th>Username</th>
+                                        <th>Email/th>
+                                        <th>Status</th>
+                                        <th>Created At</th>
+                                        <th class="text-center">Last Login</th>
+                                        <th class="text-center">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-center border-right">1</td>
+                                        <td>
+                                           kerma_pr4
+                                        </td>
+                                        <td>
+                                           abc@gmail.com
+                                        </td>
+                                        <td>active</td>
+                                        <td>Oct 21, 2015 1:50:22 AM</td>
+                                        <td class="text-center">
+                                           Oct 21, 2015 1:50:22 AM
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="#" class="btn btn-primary btn-sm rounded" data-toggle="tooltip" data-placement="top" data-original-title="Tambah Kerjasama"><i class="fa fa-plus-circle"></i></a>
+                                            
+                                            <a href="#" class="btn btn-danger btn-sm rounded" data-toggle="tooltip" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a>
+                                        </td>
+                                    </tr>
+                                     <tr>
+                                        <td class="text-center border-right">2</td>
+                                        <td>
+                                            Kegiatan Magang/Praktek Kerja Bagi Mahasiwa Pendidikan Profesi Akuntansi Fakultas Ekonomi USU
+                                        </td>
+                                        <td>
+                                            University of Girona
+                                        </td>
+                                        <td>MoA</td>
+                                        <td>Dalam Negeri</td>
+                                        <td class="text-center">
+                                           01-01-2018
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="#" class="btn btn-primary btn-sm rounded" data-toggle="tooltip" data-placement="top" data-original-title="Tambah Kerjasama"><i class="fa fa-plus-circle"></i></a>
+                                            
+                                            <a href="#" class="btn btn-danger btn-sm rounded" data-toggle="tooltip" data-placement="top" data-original-title="Hapus"><i class="fa fa-times"></i></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th class="text-center border-right">No.</th>
+                                        <th>Bidang Kerjasama</th>
+                                        <th>Instansi Partner</th>
+                                        <th>Jenis</th>
+                                        <th>Bentuk</th>
+                                        <th class="text-center">Tanggal Berakhir</th>
+                                        <th class="text-center">Aksi</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                            <!-- </div>/.table-responsive -->
+                            <!--/ End sample table -->
+                        </div>
+                    </div><!-- /.row -->
+                </div><!-- /.body-content -->
+                <!--/ End body content -->
+
+                <!-- Start footer content -->
+                <footer class="footer-content">
+                    <span id="tour-19">
+                        2016 - <span id="copyright-year"></span> © Kerma USU - Kerja Sama
+                    </span>
+                    <span id="tour-20" class="pull-right">0.01 GB(0%) of 15 GB used</span>
+                </footer><!-- /.footer-content -->
+                <!--/ End footer content -->
+
+            </section><!-- /#page-content -->
+            <!--/ END PAGE CONTENT -->
+
+            <!-- START @SIDEBAR RIGHT -->
+            <aside id="sidebar-right">
+
+                <div class="panel panel-tab">
+                    <div class="panel-heading no-padding">
+                        <div class="pull-right">
+                            <ul class="nav nav-tabs">
+                                <li>
+                                    <a href="#sidebar-setting" data-toggle="tab">
+                                        <i class="fa fa-paint-brush"></i>
+                                    </a>
+                                </li>                               
+                            </ul>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-body no-padding">
+                        <div class="tab-content">
+
+                            <div class="tab-pane in active" id="sidebar-setting">
+                                <div class="sidebar-setting">
+                                    <!-- Start right navigation - menu -->
+                                    <ul class="sidebar-menu">
+                                        <!-- Start category color schemes -->
+                                        <li class="sidebar-category">
+                                            <span>COLOR SCHEMES</span>
+                                            <span class="pull-right"><i class="fa fa-tint"></i></span>
+                                        </li>
+                                        <!--/ End category color schemes -->
+
+                                        <!-- Start navigation - themes -->
+                                        <li>
+                                            <div class="sidebar-themes color-schemes">
+
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #81b71a" data-toggle="tooltip" data-placement="right" data-original-title="Default"><span class="hide">default</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #00B1E1" data-toggle="tooltip" data-placement="top" data-original-title="Blue"><span class="hide">blue</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #37BC9B" data-toggle="tooltip" data-placement="top" data-original-title="Cyan"><span class="hide">cyan</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #8CC152" data-toggle="tooltip" data-placement="top" data-original-title="Green"><span class="hide">green</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #E9573F" data-toggle="tooltip" data-placement="top" data-original-title="Red"><span class="hide">red</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #F6BB42" data-toggle="tooltip" data-placement="top" data-original-title="Yellow"><span class="hide">yellow</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #906094" data-toggle="tooltip" data-placement="top" data-original-title="Purple"><span class="hide">purple</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #D39174" data-toggle="tooltip" data-placement="top" data-original-title="Brown"><span class="hide">brown</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #9FB478" data-toggle="tooltip" data-placement="left" data-original-title="Green Army"><span class="hide">green-army</span></a>
+
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #63D3E9" data-toggle="tooltip" data-placement="right" data-original-title="Blue Sea"><span class="hide">blue-sea</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #5577B4" data-toggle="tooltip" data-placement="top" data-original-title="Blue Gray"><span class="hide">blue-gray</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #AF86B9" data-toggle="tooltip" data-placement="top" data-original-title="Purple Gray"><span class="hide">purple-gray</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #CC6788" data-toggle="tooltip" data-placement="top" data-original-title="Purple Wine"><span class="hide">purple-wine</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #F06F6F" data-toggle="tooltip" data-placement="top" data-original-title="Alizarin Crimson"><span class="hide">alizarin-crimson</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #979797" data-toggle="tooltip" data-placement="top" data-original-title="Black And White"><span class="hide">black-and-white</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #8BC4B9" data-toggle="tooltip" data-placement="top" data-original-title="Amazon"><span class="hide">amazon</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #B0B069" data-toggle="tooltip" data-placement="top" data-original-title="Amber"><span class="hide">amber</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #A9C784" data-toggle="tooltip" data-placement="left" data-original-title="Android green"><span class="hide">android-green</span></a>
+
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #B3998A" data-toggle="tooltip" data-placement="right" data-original-title="Antique brass"><span class="hide">antique-brass</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #8D8D6E" data-toggle="tooltip" data-placement="top" data-original-title="Antique Bronze"><span class="hide">antique-bronze</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #B0B69D" data-toggle="tooltip" data-placement="top" data-original-title="Artichoke"><span class="hide">artichoke</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #F19B69" data-toggle="tooltip" data-placement="top" data-original-title="Atomic Tangerine"><span class="hide">atomic-tangerine</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #98777B" data-toggle="tooltip" data-placement="top" data-original-title="Bazaar"><span class="hide">bazaar</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #C3A961" data-toggle="tooltip" data-placement="top" data-original-title="Bistre Brown"><span class="hide">bistre-brown</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #D6725E" data-toggle="tooltip" data-placement="top" data-original-title="Bittersweet"><span class="hide">bittersweet</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #7789D1" data-toggle="tooltip" data-placement="top" data-original-title="Blueberry"><span class="hide">blueberry</span></a>
+                                                <a class="theme" href="javascript:void(0);" style="background-color: #6FA362" data-toggle="tooltip" data-placement="left" data-original-title="Bud Green"><span class="hide">bud-green</span></a>
+
+                                            </div><!-- /.sidebar-themes -->
+                                        </li>
+                                        <!--/ End navigation - themes -->
+
+                                        <!-- Start category navbar color -->
+                                        <li class="sidebar-category">
+                                            <span>NAVBAR COLOR</span>
+                                            <span class="pull-right"><i class="fa fa-tint"></i></span>
+                                        </li>
+                                        <!--/ End category navbar color -->
+
+                                        <!-- Start navigation - navbar color -->
+                                        <li>
+                                            <div class="sidebar-themes navbar-color">
+
+                                                <a class="theme bg-dark" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Dark"><span class="hide">dark</span></a>
+                                                <a class="theme bg-light" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Light"><span class="hide">light</span></a>
+                                                <a class="theme bg-primary" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Primary"><span class="hide">primary</span></a>
+                                                <a class="theme bg-success" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Success"><span class="hide">success</span></a>
+                                                <a class="theme bg-info" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Info"><span class="hide">info</span></a>
+                                                <a class="theme bg-warning" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Warning"><span class="hide">warning</span></a>
+                                                <a class="theme bg-danger" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Danger"><span class="hide">danger</span></a>
+
+                                            </div><!-- /.navbar-color -->
+                                        </li>
+                                        <!--/ End navigation - navbar color -->
+
+                                        <!-- Start category sidebar color -->
+                                        <li class="sidebar-category">
+                                            <span>SIDEBAR COLOR</span>
+                                            <span class="pull-right"><i class="fa fa-tint"></i></span>
+                                        </li>
+                                        <!--/ End category sidebar color -->
+
+                                        <!-- Start navigation - sidebar color -->
+                                        <li>
+                                            <div class="sidebar-themes sidebar-color">
+
+                                                <a class="theme bg-dark" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Dark"><span class="hide">dark</span></a>
+                                                <a class="theme bg-light" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Light"><span class="hide">light</span></a>
+                                                <a class="theme bg-primary" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Primary"><span class="hide">primary</span></a>
+                                                <a class="theme bg-success" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Success"><span class="hide">success</span></a>
+                                                <a class="theme bg-info" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Info"><span class="hide">info</span></a>
+                                                <a class="theme bg-warning" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Warning"><span class="hide">warning</span></a>
+                                                <a class="theme bg-danger" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Danger"><span class="hide">danger</span></a>
+
+                                            </div><!-- /.sidebar-color -->
+                                        </li>
+                                        <!--/ End navigation - sidebar color -->
+
+                                        <!-- Start category task progress -->
+                                        <li class="sidebar-category">
+                                            <span>TASK PROGRESS</span>
+                                            <span class="pull-right"><i class="fa fa-sliders"></i></span>
+                                        </li>
+                                        <!--/ End category task progress -->
+
+                                        <!--/ Start navigation - task progress -->
+                                        <li>
+                                            <ul class="list-group sidebar-task">
+                                                <li class="list-group-item">
+                                                    <p class="details"> <span> Core System </span> <span class="pull-right"> 82% </span> </p>
+                                                    <div class="progress progress-xs progress-striped active no-margin">
+                                                        <div style="width: 82%" class="progress-bar progress-bar-success"> </div>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <p class="details"> <span> Front-End </span> <span class="pull-right"> 67% </span> </p>
+                                                    <div class="progress progress-xs progress-striped active no-margin">
+                                                        <div style="width: 47%" class="progress-bar progress-bar-danger"> </div>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <p class="details"> <span> Back-End </span> <span class="pull-right"> 45% </span> </p>
+                                                    <div class="progress progress-xs progress-striped active no-margin">
+                                                        <div style="width: 47%" class="progress-bar progress-bar-info"> </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <!--/ End navigation - task progress -->
+
+                                        <!-- Start category summary system -->
+                                        <li class="sidebar-category">
+                                            <span>SUMMARY SYSTEM</span>
+                                            <span class="pull-right"><i class="fa fa-bar-chart-o"></i></span>
+                                        </li>
+                                        <!--/ End category summary system -->
+
+                                        <!-- Start left navigation - summary -->
+                                        <li>
+                                            <ul class="sidebar-summary sparklines">
+                                                <li>
+                                                    <div class="list-info">
+                                                        <span>Average Users</span>
+                                                        <h4>1, 412, 101</h4>
+                                                    </div>
+                                                    <div class="chart"><span class="average">4,2,3,2,4,2,5,1,2,2,5,3</span></div>
+                                                    <div class="clearfix"></div>
+                                                </li>
+                                                <li>
+                                                    <div class="list-info">
+                                                        <span>Daily Traffic</span>
+                                                        <h4>781, 601</h4>
+                                                    </div>
+                                                    <div class="chart"><span class="traffic">1,2,3,2,4,1,5,3,2,4,2,3</span></div>
+                                                    <div class="clearfix"></div>
+                                                </li>
+                                                <li>
+                                                    <div class="list-info">
+                                                        <span>Disk Usage</span>
+                                                        <h4>52.2%</h4>
+                                                    </div>
+                                                    <div class="chart"><span class="disk">5,5,3,2,1,3,4,3,2,4,1,3</span></div>
+                                                    <div class="clearfix"></div>
+                                                </li>
+                                                <li>
+                                                    <div class="list-info">
+                                                        <span>CPU Usage</span>
+                                                        <h4>67.8%</h4>
+                                                    </div>
+                                                    <div class="chart"><span class="cpu">1,5,3,2,4,5,5,3,2,4,5,3</span></div>
+                                                    <div class="clearfix"></div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <!--/ End left navigation - summary -->
+                                    </ul>
+                                    <!-- Start right navigation - menu -->
+                                </div>
+                            </div><!-- /#sidebar-setting -->
+                        </div>
+                    </div>
+                </div>
+
+            </aside><!-- /#sidebar-right -->
+            <!--/ END SIDEBAR RIGHT -->
+
+        </section><!-- /#wrapper -->
+        <!--/ END WRAPPER -->
+
+        <!-- START @BACK TOP -->
+        <div id="back-top" class="animated pulse circle">
+            <i class="fa fa-angle-up"></i>
+        </div><!-- /#back-top -->
+        <!--/ END BACK TOP -->
+
+        <!-- START @CORE PLUGINS -->
+        <script src="../assets/global/plugins/bower_components/jquery-cookie/jquery.cookie.js"></script>
+        <script src="../assets/global/plugins/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="../assets/global/plugins/bower_components/typehead.js/dist/handlebars.js"></script>
+        <script src="../assets/global/plugins/bower_components/typehead.js/dist/typeahead.bundle.min.js"></script>
+        <script src="../assets/global/plugins/bower_components/jquery-nicescroll/jquery.nicescroll.min.js"></script>
+        <script src="../assets/global/plugins/bower_components/jquery.sparkline.min/index.js"></script>
+        <script src="../assets/global/plugins/bower_components/jquery-easing-original/jquery.easing.1.3.min.js"></script>
+        <script src="../assets/global/plugins/bower_components/ionsound/js/ion.sound.min.js"></script>
+        <script src="../assets/global/plugins/bower_components/bootbox/bootbox.js"></script>
+        <!--/ END CORE PLUGINS -->
+
+        <!-- START @PAGE LEVEL PLUGINS -->
+        <script src="../assets/global/plugins/bower_components/bootstrap-session-timeout/dist/bootstrap-session-timeout.min.js"></script>
+        <script src="../assets/global/plugins/bower_components/flot/jquery.flot.js"></script>
+        <script src="../assets/global/plugins/bower_components/flot/jquery.flot.spline.min.js"></script>
+        <script src="../assets/global/plugins/bower_components/flot/jquery.flot.categories.js"></script>
+        <script src="../assets/global/plugins/bower_components/flot/jquery.flot.tooltip.min.js"></script>
+        <script src="../assets/global/plugins/bower_components/flot/jquery.flot.resize.js"></script>
+        <script src="../assets/global/plugins/bower_components/flot/jquery.flot.pie.js"></script>
+        <script src="../assets/global/plugins/bower_components/dropzone/downloads/dropzone.min.js"></script>
+        <script src="../assets/global/plugins/bower_components/jquery.gritter/js/jquery.gritter.min.js"></script>
+        <script src="../assets/global/plugins/bower_components/skycons-html5/skycons.js"></script>
+        <script src="../assets/global/plugins/bower_components/waypoints/lib/jquery.waypoints.min.js"></script>
+        <script src="../assets/global/plugins/bower_components/counter-up/jquery.counterup.min.js"></script>
+        <script src="../assets/global/plugins/bower_components/bootstrap-tour/build/js/bootstrap-tour.min.js"></script>
+        <!--/ END PAGE LEVEL PLUGINS -->
+
+        <!-- START @PAGE LEVEL SCRIPTS -->
+        <script src="../assets/js/apps.js"></script>
+        <script src="../assets/js/pages/blankon.dashboard.js"></script>
+        <script src="../assets/js/demo.js"></script>
+        <!--/ END PAGE LEVEL SCRIPTS -->
+        <!--/ END JAVASCRIPT SECTION -->
+
+
+        <!--Datatables -->
+        <script src="../assets/global/plugins/bower_components/datatables/jquery.dataTables.min.js"></script>
+        <script src="../assets/global/plugins/bower_components/datatables/dataTables.bootstrap.min.js"></script>
+
+
+        <!-- START GOOGLE ANALYTICS -->
+        <script  type="text/javascript">
+            $(function () {
+                $("#data").DataTable();               
+            });
+            document.getElementById("username").innerHTML = localStorage.getItem("username");
+            document.getElementById("u_profile").innerHTML = localStorage.getItem("username");
+            if(localStorage.getItem("username")=="super"){
+                document.getElementById("u_profile").show();
+            }
+        </script>
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-55892530-1', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+        <!--/ END GOOGLE ANALYTICS -->
+
+    </body>
+    <!--/ END BODY -->
+
+</html>
